@@ -1,0 +1,48 @@
+# IntelliJ project files
+.idea/
+*.iml
+*.iws
+
+# Workspace and shelf (session-specific)
+workspace.xml
+tasks.xml
+shelf/
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Build output
+/out/
+build/
+dist/
+target/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Node projects (if using Node.js)
+node_modules/
+
+# Python projects
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Java/Maven/Gradle projects
+*.class
+*.jar
+*.war
+*.ear
+.gradle/
+!gradle-wrapper.jar
+
+# VS Code (if someone uses it)
+.vscode/
