@@ -3,6 +3,10 @@
 *.iml
 *.iws
 
+
+/workspace.xml
+
+
 # Workspace and shelf (session-specific)
 workspace.xml
 tasks.xml
