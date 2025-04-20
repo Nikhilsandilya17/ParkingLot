@@ -5,9 +5,11 @@ public class ParkingLotDemo {
         ParkingLot parkingLot = ParkingLot.getInstance();
         parkingLot.addLevel(new Level(1, 10));
 
-        Vehicle car = new Car("1234", VehicleType.CAR);
-        Vehicle bike = new Motorcycle("5678", VehicleType.MOTORCYCLE);
-        Vehicle truck = new Truck("ABCD", VehicleType.TRUCK);
+        VehicleFactory vehicleFactory = new VehicleFactory();
+
+        Vehicle car = vehicleFactory.createVehicle("1234", VehicleType.CAR);
+        Vehicle bike = vehicleFactory.createVehicle("5678", VehicleType.MOTORCYCLE);
+        Vehicle truck = vehicleFactory.createVehicle("ABCD", VehicleType.TRUCK);
 
         //Park vehicles
         parkingLot.parkVehicle(car);
@@ -17,7 +19,7 @@ public class ParkingLotDemo {
         //display availability
         parkingLot.displayAvailability();
 
-        //unpark vehicle
+        //unparkVehicle vehicle
         parkingLot.unparkVehicle(car);
 
         //display availability

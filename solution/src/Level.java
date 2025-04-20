@@ -12,33 +12,24 @@ public class Level {
         this.parkingSpots = new ArrayList<>();
         this.floor = floor;
 
-        //Out of 100 parking spots, giving 50 to bikes, 40 to cars, 10 to trucks
-        double bikeSpots = 0.5;
-        double carSpots = 0.4;
-        double truckSpots = 0.1;
+        int numBikes = (int) (0.5 * numSpots);
+        int numCars = (int) (0.4 * numSpots);
+        int numTrucks = (int) (0.1 * numSpots);
 
-        int numBikes = (int) (bikeSpots*numSpots);
-        int numCars = (int) (numSpots*carSpots);
-        int numTrucks = (int) (numSpots*truckSpots);
-
-        for(int i=0;i<numBikes;i++){
-            parkingSpots.add(new ParkingSpot(i+1, VehicleType.MOTORCYCLE));
-
+        for (int i = 0; i < numBikes; i++) {
+            parkingSpots.add(new ParkingSpot(i + 1, VehicleType.MOTORCYCLE, new BikeParkingStrategy()));
         }
-        for(int i=0;i<numCars;i++){
-            parkingSpots.add(new ParkingSpot(parkingSpots.size()+1, VehicleType.CAR));
-
+        for (int i = 0; i < numCars; i++) {
+            parkingSpots.add(new ParkingSpot(parkingSpots.size() + 1, VehicleType.CAR, new CarParkingStrategy()));
         }
-        for(int i=0;i<numTrucks;i++){
-            parkingSpots.add(new ParkingSpot(parkingSpots.size()+1, VehicleType.TRUCK));
-
+        for (int i = 0; i < numTrucks; i++) {
+            parkingSpots.add(new ParkingSpot(parkingSpots.size() + 1, VehicleType.TRUCK, new TruckParkingStrategy()));
         }
-
     }
 
-    public boolean parkVehicle(Vehicle vehicle){
-        for(ParkingSpot parkingSpot:parkingSpots){
-            if(parkingSpot.isAvailable() && vehicle.getVehicleType()==parkingSpot.getVehicleType()){
+    public boolean parkVehicle(Vehicle vehicle) {
+        for (ParkingSpot parkingSpot : parkingSpots) {
+            if (parkingSpot.isAvailable() && parkingSpot.getVehicleType()==vehicle.getVehicleType()) {
                 parkingSpot.parkVehicle(vehicle);
                 return true;
             }
@@ -46,15 +37,16 @@ public class Level {
         return false;
     }
 
-    public boolean unparkVehicle(Vehicle vehicle){
-        for(ParkingSpot parkingSpot:parkingSpots){
-            if(!parkingSpot.isAvailable() && vehicle.getVehicleType()==parkingSpot.getVehicleType()){
+    public boolean unparkVehicle(Vehicle vehicle) {
+        for (ParkingSpot parkingSpot : parkingSpots) {
+            if (!parkingSpot.isAvailable() && parkingSpot.getParkedVehicle().equals(vehicle)) {
                 parkingSpot.unparkVehicle();
                 return true;
             }
         }
         return false;
     }
+
 
     public void displayAvailability(){
         for(ParkingSpot parkingSpot: parkingSpots){
